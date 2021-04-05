@@ -37,7 +37,7 @@ class _RetroBoardState extends State<RetroBoard> {
             ],
           ),
           Divider(
-            height: 5.0,
+            height: 20.0,
           ),
           Text(
             'You have pushed the button this many times:',
