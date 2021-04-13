@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class RetroBoard extends StatefulWidget {
@@ -10,14 +11,6 @@ class RetroBoard extends StatefulWidget {
 }
 
 class _RetroBoardState extends State<RetroBoard> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,34 +18,57 @@ class _RetroBoardState extends State<RetroBoard> {
         title: Text(widget.title),
       ),
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        // crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Row(
             children: [
-              TextField(
-                decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    hintText: 'Set the context of the retrospective here...'),
+              Flexible(
+                child: TextField(
+                  decoration: InputDecoration(
+                      border: InputBorder.none,
+                      hintText: 'Set the context of the retrospective here...'),
+                ),
+              ),
+              SizedBox(
+                width: 5.0,
+              ),
+              Icon(
+                CupertinoIcons.eye,
+                color: Colors.grey,
+                size: 20.0,
+              ),
+              SizedBox(
+                width: 20.0,
+              ),
+              Flexible(
+                child: TextField(
+                  decoration: InputDecoration(
+                    prefixIcon: Icon(Icons.search),
+                    hintText: 'Search',
+                  ),
+                ),
+              ),
+              DropdownButton<String>(
+                items: <String>[
+                  'Sort by order',
+                  'Sort by date',
+                  'Sort by votes',
+                ].map((String value) {
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: Text(value),
+                  );
+                }).toList(),
+                onChanged: (_) {},
               )
             ],
           ),
           Divider(
-            height: 20.0,
-          ),
-          Text(
-            'You have pushed the button this many times:',
-          ),
-          Text(
-            '$_counter',
-            style: Theme.of(context).textTheme.headline4,
+            color: Colors.green,
+            thickness: 3.0,
           ),
         ],
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
